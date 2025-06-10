@@ -47,9 +47,7 @@ export function ChatHeader({ onNewChat, hasMessages }: ChatHeaderProps) {
             )}
           </button>
           
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
-            <Settings size={20} className="text-gray-600 dark:text-gray-400" />
-          </button>
+          
         </div>
       </div>
     </div>
