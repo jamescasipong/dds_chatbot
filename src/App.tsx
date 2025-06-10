@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ChatHeader } from './components/ChatHeader';
 import { ChatMessage } from './components/ChatMessage';
-import { ChatInput } from './components/ChatInput';
+import { ChatInput } from './components/ChatInput'; 
 import { EmptyState } from './components/EmptyState';
 import { ErrorMessage } from './components/ErrorMessage';
 import { NewChatConfirmation } from './components/NewChatConfirmation';

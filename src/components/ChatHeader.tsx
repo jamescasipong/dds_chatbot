@@ -19,7 +19,7 @@ export function ChatHeader({ onNewChat, hasMessages }: ChatHeaderProps) {
           </div>
           <div>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-white">DDS Chat Bot</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Powered by Gemini AI</p>
+            {/* <p className="text-sm text-gray-500 dark:text-gray-400">Powered by Gemini AI</p> */}
           </div>
         </div>
         

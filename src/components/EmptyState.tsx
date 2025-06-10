@@ -41,7 +41,7 @@ export function EmptyState({ onStartChat }: EmptyStateProps) {
           
           <div className="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
             <Sparkles className="text-green-500 dark:text-green-400" size={20} />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Powered by Gemini AI</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Duterte peasant</span>
           </div>
           
           <div className="flex items-center gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
