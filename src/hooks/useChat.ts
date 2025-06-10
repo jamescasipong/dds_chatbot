@@ -1,13 +1,27 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Message, ChatState } from '../types/chat';
 import { sendMessage as sendGeminiMessage } from '../services/gemini';
 
+const STORAGE_KEY = 'dds-chat-messages';
+
 export function useChat() {
-  const [state, setState] = useState<ChatState>({
-    messages: [],
-    isLoading: false,
-    error: null,
+  const [state, setState] = useState<ChatState>(() => {
+    // Load messages from localStorage on initialization
+    const savedMessages = localStorage.getItem(STORAGE_KEY);
+    return {
+      messages: savedMessages ? JSON.parse(savedMessages).map((msg: any) => ({
+        ...msg,
+        timestamp: new Date(msg.timestamp)
+      })) : [],
+      isLoading: false,
+      error: null,
+    };
   });
+
+  // Save messages to localStorage whenever messages change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.messages));
+  }, [state.messages]);
 
   const sendMessage = useCallback(async (content: string) => {
     const userMessage: Message = {
@@ -55,11 +69,13 @@ export function useChat() {
   }, []);
 
   const clearChat = useCallback(() => {
-    setState({
+    const newState = {
       messages: [],
       isLoading: false,
       error: null,
-    });
+    };
+    setState(newState);
+    localStorage.removeItem(STORAGE_KEY);
   }, []);
 
   return {

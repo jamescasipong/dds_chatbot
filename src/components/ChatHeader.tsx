@@ -1,8 +1,13 @@
 import React from 'react';
-import { MessageCircle, Settings, Moon, Sun } from 'lucide-react';
+import { MessageCircle, Settings, Moon, Sun, Plus } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
-export function ChatHeader() {
+interface ChatHeaderProps {
+  onNewChat: () => void;
+  hasMessages: boolean;
+}
+
+export function ChatHeader({ onNewChat, hasMessages }: ChatHeaderProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -19,6 +24,17 @@ export function ChatHeader() {
         </div>
         
         <div className="flex items-center gap-2">
+          {hasMessages && (
+            <button 
+              onClick={onNewChat}
+              className="flex items-center gap-2 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors text-sm font-medium"
+              title="Start new conversation"
+            >
+              <Plus size={16} />
+              <span className="hidden sm:inline">New Chat</span>
+            </button>
+          )}
+          
           <button 
             onClick={toggleTheme}
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
