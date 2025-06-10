@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ChatHeader } from './components/ChatHeader';
 import { ChatMessage } from './components/ChatMessage';
 import { ChatInput } from './components/ChatInput';
 import { EmptyState } from './components/EmptyState';
 import { ErrorMessage } from './components/ErrorMessage';
+import { NewChatConfirmation } from './components/NewChatConfirmation';
 import { useChat } from './hooks/useChat';
 
 function App() {
-  const { messages, isLoading, error, sendMessage, clearError } = useChat();
+  const { messages, isLoading, error, sendMessage, clearError, clearChat } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [showNewChatConfirmation, setShowNewChatConfirmation] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -23,9 +25,24 @@ function App() {
     sendMessage(message);
   };
 
+  const handleNewChat = () => {
+    if (messages.length > 0) {
+      setShowNewChatConfirmation(true);
+    }
+  };
+
+  const confirmNewChat = () => {
+    clearChat();
+    setShowNewChatConfirmation(false);
+  };
+
+  const cancelNewChat = () => {
+    setShowNewChatConfirmation(false);
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-      <ChatHeader />
+      <ChatHeader onNewChat={handleNewChat} hasMessages={messages.length > 0} />
       
       <div className="flex-1 overflow-hidden flex flex-col">
         {messages.length === 0 && !error ? (
@@ -70,6 +87,12 @@ function App() {
       </div>
       
       <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+      
+      <NewChatConfirmation
+        isOpen={showNewChatConfirmation}
+        onConfirm={confirmNewChat}
+        onCancel={cancelNewChat}
+      />
     </div>
   );
 }
