@@ -76,8 +76,3 @@ This project is **open source**, so feel free to fork, contribute, or modify it 
 4. Push to the branch (`git push origin feature-name`).
 5. Create a Pull Request.
 
----
-
-## License
-
-This project is **open-source** and licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
